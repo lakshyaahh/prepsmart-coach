@@ -32,8 +32,18 @@ export default function Dashboard() {
   }, [user, router]);
 
   const handleLogout = async () => {
+    // START FIX: Check if auth is defined before using it
+    if (!auth) {
+      console.error('Firebase Auth is not initialized. Cannot log out.');
+      // Optionally redirect the user to prevent them from getting stuck
+      setUser(null);
+      router.push('/');
+      return; 
+    }
+    // END FIX
+
     try {
-      await signOut(auth);
+      await signOut(auth); // This was the line causing the error when 'auth' was undefined
       setUser(null);
       router.push('/');
     } catch (error) {

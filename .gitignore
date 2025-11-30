@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Firebase Admin SDK Private Key
+prepsmart-68849-firebase-adminsdk-fbsvc-7a26b5cc56.json
