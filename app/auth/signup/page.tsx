@@ -1,10 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { useState, FormEvent } from 'react';
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Lock, Mail, UserPlus } from 'lucide-react';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -13,13 +18,21 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
+    // Runtime safety check
+    if (!auth) {
+      setError('Authentication service is unavailable. Please refresh.');
+      setLoading(false);
+      return;
+    }
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      // FIX: Using auth! to assert non-null type for TypeScript compiler
+      await createUserWithEmailAndPassword(auth!, email, password);
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.message);
@@ -31,9 +44,18 @@ export default function SignUp() {
   const handleGoogleSignUp = async () => {
     setLoading(true);
     setError('');
+
+    // Runtime safety check
+    if (!auth) {
+      setError('Authentication service is unavailable. Please refresh.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      // FIX: Using auth! to assert non-null type for TypeScript compiler
+      await signInWithPopup(auth!, provider);
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.message);
@@ -43,7 +65,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-800 to-indigo-600 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-lg shadow-2xl p-8">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Create Account
@@ -60,34 +82,43 @@ export default function SignUp() {
             <label className="block text-gray-700 font-semibold mb-2">
               Email
             </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-gray-700 font-semibold mb-2">
               Password
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Min 6 characters"
+                required
+              />
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 disabled:opacity-50"
           >
-            {loading ? 'Creating...' : 'Sign Up'}
+            <UserPlus className="w-5 h-5" />
+            {loading ? 'Creating Account...' : 'Sign Up'}
           </button>
         </form>
 
@@ -120,12 +151,12 @@ export default function SignUp() {
               d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
             />
           </svg>
-          Sign up with Google
+          Sign Up with Google
         </button>
 
         <p className="mt-6 text-center text-gray-600">
           Already have an account?{' '}
-          <Link href="/auth/login" className="text-blue-600 hover:underline font-semibold">
+          <Link href="/auth/login" className="text-indigo-600 hover:underline font-semibold">
             Sign In
           </Link>
         </p>
