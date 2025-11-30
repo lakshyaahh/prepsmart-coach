@@ -20,20 +20,22 @@ export default function Login() {
   const [resetMessage, setResetMessage] = useState('');
   const router = useRouter();
 
-  // FIX: Check for auth object before proceeding
+  // FIX: Added '!' to auth in function calls to resolve persistent TypeScript error
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
+    // This check ensures runtime safety
     if (!auth) {
-      setError('Authentication service is unavailable.');
+      setError('Authentication service is unavailable. Please refresh.');
       setLoading(false);
       return;
     }
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      // CRITICAL FIX: Using auth! asserts the type to the TypeScript compiler
+      await signInWithEmailAndPassword(auth!, email, password);
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.message);
@@ -42,20 +44,21 @@ export default function Login() {
     }
   };
 
-  // FIX: Check for auth object before proceeding
+  // FIX: Added '!' to auth in function calls
   const handleGoogleSignIn = async () => {
     setLoading(true);
     setError('');
 
     if (!auth) {
-      setError('Authentication service is unavailable.');
+      setError('Authentication service is unavailable. Please refresh.');
       setLoading(false);
       return;
     }
 
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      // CRITICAL FIX: Using auth!
+      await signInWithPopup(auth!, provider); 
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.message);
@@ -64,7 +67,7 @@ export default function Login() {
     }
   };
 
-  // FIX: Check for auth object before proceeding
+  // FIX: Added '!' to auth in function calls
   const handleForgotPassword = async () => {
     if (!email) {
       setError('Please enter your email to reset your password.');
@@ -72,7 +75,7 @@ export default function Login() {
     }
 
     if (!auth) {
-      setError('Authentication service is unavailable.');
+      setError('Authentication service is unavailable. Please refresh.');
       return;
     }
 
@@ -80,7 +83,8 @@ export default function Login() {
     setError('');
     
     try {
-      await sendPasswordResetEmail(auth, email);
+      // CRITICAL FIX: Using auth!
+      await sendPasswordResetEmail(auth!, email); 
       setResetMessage('Password reset email sent. Check your inbox.');
     } catch (err: any) {
       setError(err.message);
