@@ -3,6 +3,7 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyCgeaggtjyjvhAnctisqF0PFSkKj6f6ZJg',
   authDomain: 'prepsmart-68849.firebaseapp.com',
@@ -13,7 +14,10 @@ const firebaseConfig = {
   measurementId: 'G-2GJ06TL7EB',
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase services
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
