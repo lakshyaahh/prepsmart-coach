@@ -153,25 +153,35 @@ export function useVapi(callbacks?: VapiCallbacks) {
     (assistantOverride?: string) => {
       if (!vapiInstanceRef.current) {
         console.error('Vapi client not initialized');
+        callbacks?.onError?.({
+          message: 'Vapi client not initialized',
+        });
         return;
       }
 
       try {
         const assistantId = assistantOverride || VAPI_ASSISTANT_ID;
         if (!assistantId) {
-          console.error(
-            'No Vapi Assistant ID provided. Please set NEXT_PUBLIC_VAPI_ASSISTANT_ID in .env.local'
-          );
+          const errorMsg = 'No Vapi Assistant ID provided. Please set NEXT_PUBLIC_VAPI_ASSISTANT_ID in .env.local';
+          console.error(errorMsg);
+          callbacks?.onError?.({
+            message: errorMsg,
+          });
           return;
         }
 
+        console.log(`Attempting to start Vapi with assistant: ${assistantId}`);
+        console.log(`Using public key: ${VAPI_PUBLIC_KEY ? '✓ Set' : '✗ Not set'}`);
+        
+        // Call the start method with the assistant ID
         vapiInstanceRef.current.start(assistantId);
         console.log(`✓ Vapi call started with assistant: ${assistantId}`);
       } catch (error) {
         console.error('Error starting Vapi call:', error);
+        callbacks?.onError?.(error);
       }
     },
-    []
+    [callbacks]
   );
 
   // Stop Vapi call

@@ -100,8 +100,19 @@ export default function InterviewRoom() {
     onError: (error: any) => {
       console.error('Vapi error:', error);
       console.error('Full error object:', JSON.stringify(error, null, 2));
-      alert(`Vapi Error: ${error?.message || JSON.stringify(error)}`);
+      
+      const errorMsg = error?.message || error?.error || JSON.stringify(error);
+      console.error('Error starting Vapi:', errorMsg);
+      
+      // Show user-friendly error
+      alert(`Vapi Interview unavailable. Please try manual mode instead.\n\nError: ${errorMsg}`);
       setVapiStatus('error');
+      
+      // Auto-switch to manual mode after 2 seconds
+      setTimeout(() => {
+        setUseVapiMode(false);
+        setVapiStatus('idle');
+      }, 2000);
     },
     onConversationUpdate: (update: any) => {
       console.log('Vapi conversation update:', update);
@@ -122,6 +133,20 @@ export default function InterviewRoom() {
     setVapiStatus('connecting');
     startVapiCall();
   };
+
+  // Auto-load questions for manual mode on mount
+  useEffect(() => {
+    if (questions.length === 0 && !useVapiMode) {
+      generateQuestionsFromVapiData({
+        role: interviewType,
+        level: difficulty,
+        techStack: [],
+        experienceYears: 3,
+        interviewType,
+        preferences: { focus: 'general' },
+      });
+    }
+  }, []);
 
   const handleRecordAnswer = () => {
     setRecording(!recording);
