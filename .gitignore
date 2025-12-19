@@ -31,7 +31,10 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env
+.env.local
+.env.local.example
+.env.*.local
 
 # vercel
 .vercel
@@ -39,5 +42,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
 # Firebase Admin SDK Private Key
 prepsmart-68849-firebase-adminsdk-fbsvc-7a26b5cc56.json
+*.json.key
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
