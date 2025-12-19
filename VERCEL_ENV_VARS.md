@@ -1,0 +1,40 @@
+# VERCEL ENV VARS - COPY PASTE THESE
+
+## Public Firebase Variables (Safe to commit)
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCgeaggtjyjvhAnctisqF0PFSkKj6f6ZJg
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=prepsmart-68849.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=prepsmart-68849
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=prepsmart-68849.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=447568244898
+NEXT_PUBLIC_FIREBASE_APP_ID=1:447568244898:web:71c0d4608bc8abe047e7fb
+```
+
+## Private Firebase Variables (Server-side only)
+```
+FIREBASE_PROJECT_ID=prepsmart-68849
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGyTpuAeCC9/jD\nlDDkBiPhu3X2FYoo+8L83/LmJMF/274RWMGTHVlbK6ruolwav7XzDUmf6OBymJul\nZNB88+K6PUlds9ypte02ZIJ2t0wi7vkAdr2IcgTjzO4ZSY9VYDiQ8ODGVxh4dSWW\n6US0Z1ZaQP8TPsm97B76LvJrf2oo9qxuM00rjrlp3AIzc1B8ZQdp3u0t2hhHdvh+\nBzUs00cY/mBSjxP9F/pbHUwlSf6lHxgL8n2qh3OezhN6XSFeLFXs6H4VfDQ1+vTS\nrV0/+BCCSvUgDNidvjvbkvJ2i4um6oHf0hytc5jldhl8QRjvGHouxKX00ffanVoV\nipycek7/AgMBAAECggEABxic3Nt1S8eVWkn6etFbS44ZFmlLbs4Z9lP6REvwmmNa\nRB1Cf8Fu9Km45t7l4dCRKrWBONOj24NmHv/bz3IXWGWirlUi3e4QIz5wR9OgRKj6\nO5GBj5LeaNFieIWfN8GBE2993qaySW6JInt+R+BefUdPs7ysj/qTWoP9hGfefsrL\nUuQqdZTDnDCjNB/PNcXYAfzdyg/vOP4HW9toRKg1ecmPR2LUQYCTEaNgULsXcoZu\n3vKC6zbHyst1KSIm3u5lmYy0D8p5QBxX2xPlOvuwubXkuUrs90a4Sm8sRWqzAhNy\nEkdoSiWbq1/U3LMaXigfuo4soC66RzMNIwk0nlxkNQKBgQDzc2CvMy8tqq23Tm4l\nbpL4vMk5JTg/uxFcDRSDw3suO5LmPV8h6tfgR8WVLg4mbsEH4J7diOEqx9P8OqZy\nzuCr1IhL9BMUGB5PbXlb1epCKK29piFcWz2OxTYfBPmG4552hdXKcVY2/VmgDNNw\n5Rc39+M9wRerJE6VgkXniGp+fQKBgQDRCHKA5AzotVw1QSeZunzI052+N9McWGR6\neipSbGkZI460W4kqjZdOTYIROtBeoNnjl3OXoFeNcOkignvBiTF0J418UkPcl5ZK\nFrfGOoR0adnKae1tPxcS1fhL6SzdAu7MTE9QClZpu4U5FwRFzThd4RoRxZuANGJR\nc1VgtFBQKwKBgQDV2DBCVSSI6ZbEIImSKcnB4hqjLrV1Db4W7Iprn2dxWfUUdy48\nXcwYfxLoklbtnXXDlKQXlqeq63Ki6WXSDTS+2uaKSTAFA5aEUHY8m++1A4RxxR8i\nwCaXZVW/85+3w/Mqyy7bL6j6jpqOgxWr4h/+EqmyUg2XUEITBCahVWuuBQKBgB0F\nijhA8VXh0DKIoEHktWyAjPca8xGNaC3lBjk5WgImgKqjxtCEpgw2EKfpvYJV3MqP\nfXoAxgcaNRQYf6woKxiQYUFwfoGC/le8/bjk6PzssVM8D73KM57m3DlV32ez/4mX\n0q8vMD4vzdhWTL6QNpI6LY9oGyXaoAfk9madwkTPAoGBANRVGkJxvQ289RmL/HSs\nr1ubdWJcn2G67zL4d23P84H8Mn94p37+GFaC2YL7hVQ9pqjIBDrI3L5JcNoYCqpd\nwtfkGn3TuoZt+OLegQUEKmiR4XZyorXAYXyALMbGSsPCDRyCQcof9xOfZQ5/Gtei\n24AT5I1A7RkZMH60PioXshPy\n-----END PRIVATE KEY-----\n"
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@prepsmart-68849.iam.gserviceaccount.com
+FIREBASE_PRIVATE_KEY_JSON={"type":"service_account","project_id":"prepsmart-68849","private_key_id":"7a26b5cc56d4c3f6c8b1e2a3d4e5f6g7","private_key":"-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGyTpuAeCC9/jD\nlDDkBiPhu3X2FYoo+8L83/LmJMF/274RWMGTHVlbK6ruolwav7XzDUmf6OBymJul\nZNB88+K6PUlds9ypte02ZIJ2t0wi7vkAdr2IcgTjzO4ZSY9VYDiQ8ODGVxh4dSWW\n6US0Z1ZaQP8TPsm97B76LvJrf2oo9qxuM00rjrlp3AIzc1B8ZQdp3u0t2hhHdvh+\nBzUs00cY/mBSjxP9F/pbHUwlSf6lHxgL8n2qh3OezhN6XSFeLFXs6H4VfDQ1+vTS\nrV0/+BCCSvUgDNidvjvbkvJ2i4um6oHf0hytc5jldhl8QRjvGHouxKX00ffanVoV\nipycek7/AgMBAAECggEABxic3Nt1S8eVWkn6etFbS44ZFmlLbs4Z9lP6REvwmmNa\nRB1Cf8Fu9Km45t7l4dCRKrWBONOj24NmHv/bz3IXWGWirlUi3e4QIz5wR9OgRKj6\nO5GBj5LeaNFieIWfN8GBE2993qaySW6JInt+R+BefUdPs7ysj/qTWoP9hGfefsrL\nUuQqdZTDnDCjNB/PNcXYAfzdyg/vOP4HW9toRKg1ecmPR2LUQYCTEaNgULsXcoZu\n3vKC6zbHyst1KSIm3u5lmYy0D8p5QBxX2xPlOvuwubXkuUrs90a4Sm8sRWqzAhNy\nEkdoSiWbq1/U3LMaXigfuo4soC66RzMNIwk0nlxkNQKBgQDzc2CvMy8tqq23Tm4l\nbpL4vMk5JTg/uxFcDRSDw3suO5LmPV8h6tfgR8WVLg4mbsEH4J7diOEqx9P8OqZy\nzuCr1IhL9BMUGB5PbXlb1epCKK29piFcWz2OxTYfBPmG4552hdXKcVY2/VmgDNNw\n5Rc39+M9wRerJE6VgkXniGp+fQKBgQDRCHKA5AzotVw1QSeZunzI052+N9McWGR6\neipSbGkZI460W4kqjZdOTYIROtBeoNnjl3OXoFeNcOkignvBiTF0J418UkPcl5ZK\nFrfGOoR0adnKae1tPxcS1fhL6SzdAu7MTE9QClZpu4U5FwRFzThd4RoRxZuANGJR\nc1VgtFBQKwKBgQDV2DBCVSSI6ZbEIImSKcnB4hqjLrV1Db4W7Iprn2dxWfUUdy48\nXcwYfxLoklbtnXXDlKQXlqeq63Ki6WXSDTS+2uaKSTAFA5aEUHY8m++1A4RxxR8i\nwCaXZVW/85+3w/Mqyy7bL6j6jpqOgxWr4h/+EqmyUg2XUEITBCahVWuuBQKBgB0F\nijhA8VXh0DKIoEHktWyAjPca8xGNaC3lBjk5WgImgKqjxtCEpgw2EKfpvYJV3MqP\nfXoAxgcaNRQYf6woKxiQYUFwfoGC/le8/bjk6PzssVM8D73KM57m3DlV32ez/4mX\n0q8vMD4vzdhWTL6QNpI6LY9oGyXaoAfk9madwkTPAoGBANRVGkJxvQ289RmL/HSs\nr1ubdWJcn2G67zL4d23P84H8Mn94p37+GFaC2YL7hVQ9pqjIBDrI3L5JcNoYCqpd\nwtfkGn3TuoZt+OLegQUEKmiR4XZyorXAYXyALMbGSsPCDRyCQcof9xOfZQ5/Gtei\n24AT5I1A7RkZMH60PioXshPy\n-----END PRIVATE KEY-----\n","client_email":"firebase-adminsdk-fbsvc@prepsmart-68849.iam.gserviceaccount.com","client_id":"117234567890","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_x509_cert_url":"https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40prepsmart-68849.iam.gserviceaccount.com"}
+```
+
+## Vapi Variables
+```
+NEXT_PUBLIC_VAPI_PUBLIC_KEY=e722785e-503b-407d-8b67-e48aa3dd49a8
+NEXT_PUBLIC_VAPI_ASSISTANT_ID=c9ba4b23-c155-4271-b343-85eae931c2d1
+```
+
+## Gemini API
+```
+GEMINI_API_KEY=AIza...
+```
+
+---
+
+## INSTRUCTIONS:
+1. Go to: https://vercel.com/lakshyaahh/prepsmart-coach/settings/environment-variables
+2. Delete any existing env vars
+3. Add each variable above (one by one in Vercel dashboard)
+4. Save - Vercel auto-redeploys
+5. Check Deployments tab for green checkmark ✅
+6. Visit: https://prepsmart-coach.vercel.app
