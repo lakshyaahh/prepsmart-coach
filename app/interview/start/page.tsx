@@ -39,9 +39,9 @@ export default function InterviewStart() {
           <h1 className="text-2xl font-bold text-white">
             Start Interview
           </h1>
-          <Link href="/dashboard" className="text-blue-100 hover:text-white">
-            ← Back to Dashboard
-          </Link>
+          <div className="text-blue-100 text-sm">
+            No account needed - Practice for free
+          </div>
         </div>
       </header>
 

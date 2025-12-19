@@ -10,9 +10,9 @@ export default function InterviewResults() {
   const router = useRouter();
 
   useEffect(() => {
-    // If no score, redirect back
+    // If no score, redirect back to start
     if (score === 0 && !feedback) {
-      router.push('/dashboard');
+      router.push('/interview/start');
     }
   }, [score, feedback, router]);
 
@@ -23,7 +23,7 @@ export default function InterviewResults() {
 
   const handleDashboard = () => {
     reset();
-    router.push('/dashboard');
+    router.push('/interview/start');
   };
 
   const getScoreColor = () => {

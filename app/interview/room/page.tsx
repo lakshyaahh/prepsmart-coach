@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useVapi } from '@/lib/vapi.sdk';
-import { useAuthStore } from '@/lib/store';
 
 interface VapiCollectedData {
   role?: string;
@@ -16,7 +15,6 @@ interface VapiCollectedData {
 
 export default function InterviewRoom() {
   const router = useRouter();
-  const { user } = useAuthStore();
   const [useVapiMode, setUseVapiMode] = useState(false);
   const [questions, setQuestions] = useState<any[]>([]);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -146,10 +144,6 @@ export default function InterviewRoom() {
   const handleSubmit = () => {
     router.push('/interview/results');
   };
-
-  if (!user) {
-    return <div className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-600 flex items-center justify-center text-white">Please login first</div>;
-  }
 
   const currentQuestion = questions[questionIndex];
 
