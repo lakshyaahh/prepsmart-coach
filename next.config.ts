@@ -10,10 +10,17 @@ const nextConfig: NextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  
+  // Allow dev origins (useful for ngrok tunnels during local testing)
+  experimental: {
+    // `allowedDevOrigins` helps avoid cross-origin warnings in dev when using tunnels
+    allowedDevOrigins: [
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'https://roseanna-capitular-kneadingly.ngrok-free.dev'
+    ],
+  },
   // NOTE: If you had any other existing configuration properties in this file,
-  // make sure you add them back here (e.g., experimental features, output mode).
-  // Assuming this file was empty or minimal before.
+  // make sure you add them back here (e.g., output mode).
 };
 
 export default nextConfig;

@@ -3,28 +3,42 @@ import * as admin from "firebase-admin";
 
 // ------ Firebase admin initialization helper ------
 function initFirebaseAdmin() {
+  // Return early if already initialized
   if (admin.apps && admin.apps.length) return admin;
 
-  // Prefer a JSON service account in one env var for simplicity in hosting environments
+  // Strategy 1: FIREBASE_PRIVATE_KEY_JSON (preferred for Vercel)
   const serviceAccountJson = process.env.FIREBASE_PRIVATE_KEY_JSON;
-
   if (serviceAccountJson) {
-    const serviceAccount = JSON.parse(serviceAccountJson);
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
-    });
-    return admin;
+    try {
+      const serviceAccount = JSON.parse(serviceAccountJson);
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+      });
+      console.log("✓ Firebase Admin initialized with FIREBASE_PRIVATE_KEY_JSON");
+      return admin;
+    } catch (parseErr) {
+      console.error("Failed to parse FIREBASE_PRIVATE_KEY_JSON:", parseErr);
+    }
   }
 
-  // Fallback: use individual env vars (the private key may contain escaped newlines)
+  // Strategy 2: Individual env vars (fallback for local development)
   const projectId = process.env.FIREBASE_PROJECT_ID;
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   let privateKey = process.env.FIREBASE_PRIVATE_KEY as string | undefined;
-  if (privateKey) privateKey = privateKey.replace(/\\n/g, "\n");
+  
+  if (privateKey) {
+    privateKey = privateKey.replace(/\\n/g, "\n");
+  }
 
   if (!projectId || !clientEmail || !privateKey) {
+    const missing = [
+      !projectId ? "FIREBASE_PROJECT_ID" : null,
+      !clientEmail ? "FIREBASE_CLIENT_EMAIL" : null,
+      !privateKey ? "FIREBASE_PRIVATE_KEY" : null,
+    ].filter(Boolean);
+    
     throw new Error(
-      "Firebase credentials not found. Set FIREBASE_PRIVATE_KEY_JSON or FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY."
+      `Firebase credentials incomplete. Missing: ${missing.join(", ")}. Either set FIREBASE_PRIVATE_KEY_JSON or all three: FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY.`
     );
   }
 
@@ -37,7 +51,8 @@ function initFirebaseAdmin() {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
-
+  
+  console.log("✓ Firebase Admin initialized with individual env vars");
   return admin;
 }
 
@@ -128,16 +143,24 @@ export async function POST(req: NextRequest) {
 
     // Persist to Firestore
     const docRef = await firestore.collection("generated_interviews").add({
-      createdAt: adminInstance.firestore.FieldValue.serverTimestamp(),
+      createdAt: new Date().toISOString(),
       collected,
       generated,
       source: "vapi",
     });
 
-    return NextResponse.json({ success: true, id: docRef.id, generated }, { status: 200 });
+    // Ensure response is fully serializable (no Firestore FieldValue or Date objects)
+    const safeResponse = {
+      success: true,
+      id: docRef.id,
+      generated: JSON.parse(JSON.stringify(generated)),
+    };
+    return NextResponse.json(safeResponse, { status: 200 });
   } catch (error) {
     console.error("Error in Vapi generate endpoint:", error);
-    return NextResponse.json({ success: false, error: (error as Error).message || "Failed to process request" }, { status: 500 });
+    const errorMessage = (error as Error).message || "Failed to process request";
+    console.error("Full error stack:", error);
+    return NextResponse.json({ success: false, error: errorMessage }, { status: 500 });
   }
 }
 
